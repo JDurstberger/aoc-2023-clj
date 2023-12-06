@@ -56,7 +56,7 @@
           {:lowest-location location-for-seed
            :count (inc count)}
           (update acc :count inc ))))
-    {:lowest-location 999999999
+    {:lowest-location 999999999999
      :count 1}
     seeds))
 
@@ -64,6 +64,11 @@
   [raw-almanac]
   (let [almanac (parse-almanac raw-almanac)]
     (println "parsed almanac " (count (:seeds almanac)))
-    (mapv (partial find-lowest-location (:mappings almanac)) (:seeds almanac))))
+    (let [lowest-locations (mapv (partial find-lowest-location (:mappings almanac)) (:seeds almanac))]
+      (println lowest-locations)
+      (->> lowest-locations
+           (map :lowest-location)
+           (sort)
+           (first)))))
 
 (lowest-location (slurp "./src/day_5/input.txt"))
