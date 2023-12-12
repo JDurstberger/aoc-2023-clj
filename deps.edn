@@ -1,1 +1,2 @@
-{:deps {}}
+{
+ :deps {generateme/fastmath {:mvn/version "2.2.1"}}}
